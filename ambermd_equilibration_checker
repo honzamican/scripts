@@ -1,0 +1,12 @@
+for folder in $(ls | egrep -v "\." | grep -v list)
+do 
+        echo $folder
+        for infile in $(ls $folder | egrep "\.out$" | grep -v prod)
+        do 
+                if [ 1 -eq $(cat $folder/$infile | grep -c "TIMINGS") ]
+                then 
+                        echo "$folder/$infile OK"
+                else echo "$folder/$infile NOT OK"
+                        fi
+                done
+        done
